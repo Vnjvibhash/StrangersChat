@@ -12,9 +12,9 @@ class RecentChats extends StatelessWidget {
     return Expanded(
       child: Container(
         alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: Color(0XFFFFF9F8),
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.5),
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(30.0),
             topRight: Radius.circular(30.0),
           ),

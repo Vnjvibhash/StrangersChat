@@ -11,7 +11,7 @@ class FavoriteContacts extends StatelessWidget {
     List<Message> favoriteChats = chats.where((chat) => chat.isFavorite).toList();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         children: <Widget>[
           Padding(
@@ -44,9 +44,9 @@ class FavoriteContacts extends StatelessWidget {
             child: ListView.builder(
               padding: const EdgeInsets.only(left: 10.0),
               scrollDirection: Axis.horizontal,
-              itemCount: favoriteChats.length,  // Update to use the filtered list
+              itemCount: favoriteChats.length,
               itemBuilder: (BuildContext context, int index) {
-                final Message favorite = favoriteChats[index];  // Use filtered list
+                final Message favorite = favoriteChats[index];
                 return GestureDetector(
                   onTap: () => Navigator.pushNamed(
                     context,
@@ -59,11 +59,11 @@ class FavoriteContacts extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 35.0,
-                          backgroundImage: AssetImage(favorite.sender.imageUrl),  // Update to use the sender's image
+                          backgroundImage: AssetImage(favorite.sender.imageUrl),
                         ),
                         const SizedBox(height: 6.0),
                         Text(
-                          favorite.sender.name,  // Update to use the sender's name
+                          favorite.sender.name,
                           style: const TextStyle(
                             color: Colors.white70,
                             fontSize: 16.0,

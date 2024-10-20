@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:strangerschat/router/routes.dart';
+import 'package:strangerschat/widgets/drawer_widget.dart';
 import 'package:strangerschat/widgets/online_users.dart';
 import 'package:strangerschat/widgets/favorite_contacts.dart';
 import 'package:strangerschat/widgets/recent_chats.dart';
@@ -38,182 +39,137 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _logout() {
+    Navigator.pushReplacementNamed(context, AppRoutes.signInScreen);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          backgroundColor: Colors.red,
-          title: const Text(
-            'Strangers',
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
+      child: Stack(
+        children: [
+          Container(
+            constraints: const BoxConstraints.expand(),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/grey_bg.jpg"),
+                fit: BoxFit.fill,
+              ),
             ),
           ),
-          elevation: 0.0,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.search),
-              iconSize: 24.0,
-              color: Colors.white,
-              onPressed: () {
-                _openSearchModel(context);
-              },
+          Opacity(
+            opacity: 0.7,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0XFFFFFFFF),
+                    Color(0XFFFF0E0E),
+                  ],
+                ),
+              ),
             ),
-          ],
-          bottom: TabBar(
-            isScrollable: true,
-            labelPadding: const EdgeInsets.symmetric(horizontal: 24.0),
-            tabs: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.25,
-                child: const Tab(text: "Message"),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.25,
-                child: const Tab(text: "Online"),
-              ),
-            ],
-            labelStyle: const TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
-            unselectedLabelColor: Colors.grey,
-            labelColor: Colors.white,
-            indicatorColor: Colors.red,
           ),
-        ),
-        drawer: Drawer(
-          backgroundColor: Colors.white,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 35.0,
-                        backgroundImage: AssetImage('assets/images/vivek.png'),
-                      ),
-                      SizedBox(height: 8.0),
-                      Text(
-                        "Vivek Kumar",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8.0),
-                      Text(
-                        "vivek.kumar.cipl@gmail.com",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  )),
-              ListTile(
-                iconColor: Colors.redAccent,
-                title: const Row(
-                  children: [
-                    Icon(Icons.person, size: 20.0),
-                    SizedBox(width: 8.0),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              title: const Text(
+                'Strangers',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, AppRoutes.profileScreen);
-                },
               ),
-              ListTile(
-                iconColor: Colors.redAccent,
-                title: const Row(
-                  children: [
-                    Icon(Icons.settings, size: 20.0),
-                    SizedBox(width: 8.0),
-                    Text(
-                      'Setting',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, AppRoutes.settingScreen);
-                },
-              ),
-              ListTile(
-                iconColor: Colors.redAccent,
-                title: const Row(
-                  children: [
-                    Icon(Icons.logout, size: 20.0),
-                    SizedBox(width: 8.0),
-                    Text(
-                      'Logout',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            Column(
-              children: <Widget>[
-                // const CategorySelector(),
-                Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Color(0XFFC0392B),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30.0),
-                        topRight: Radius.circular(30.0),
-                      ),
-                    ),
-                    child: const Column(
-                      children: <Widget>[
-                        FavoriteContacts(),
-                        RecentChats(),
-                      ],
-                    ),
-                  ),
+              elevation: 0,
+              actions: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.search),
+                  iconSize: 24.0,
+                  color: Colors.red,
+                  onPressed: () {
+                    _openSearchModel(context);
+                  },
                 ),
               ],
+              bottom: TabBar(
+                isScrollable: true,
+                labelPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+                tabs: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: const Tab(text: "Message"),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: const Tab(text: "Online"),
+                  ),
+                ],
+                labelStyle: const TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+                unselectedLabelColor: Colors.red.withOpacity(0.7),
+                labelColor: Colors.white,
+                indicatorColor: Colors.red.withOpacity(0.7),
+                indicator: ShapeDecoration(
+                  color: Colors.red.withOpacity(0.7),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
+                    ),
+                  ),
+                ),
+              ),
+              leading: Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    icon: const Icon(Icons.menu),
+                    iconSize: 30.0,
+                    color: Colors.red,
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                  );
+                },
+              ),
             ),
-            const OnlineUsers(),
-          ],
-        ),
+            drawer: CustomDrawer(onLogout: _logout),
+            body: TabBarView(
+              children: [
+                Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: SizedBox(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.red.withOpacity(0.7),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(30.0),
+                              topRight: Radius.circular(30.0),
+                            ),
+                          ),
+                          child: const Column(
+                            children: <Widget>[
+                              FavoriteContacts(),
+                              RecentChats(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const OnlineUsers(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

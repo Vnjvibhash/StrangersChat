@@ -15,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> {
+  
   _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
       margin: isMe

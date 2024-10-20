@@ -6,18 +6,15 @@ import 'package:strangerschat/models/Slider_objects.dart';
 class SlideItem extends StatelessWidget {
   final int index;
 
-  SlideItem(this.index);
+  const SlideItem(this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
       Positioned(
-        top: MediaQuery.of(context).size.height * 0.14,
-        left: MediaQuery.of(context).size.width * 0.13,
-        // right: 10,
+        top: MediaQuery.of(context).size.height * 0.12,
         child: Container(
           height: MediaQuery.of(context).size.height * 0.50,
-          // width: 323,
           alignment: Alignment.center,
           child: Image(
             image: AssetImage(slideList[index].imageUrl),
@@ -27,7 +24,7 @@ class SlideItem extends StatelessWidget {
       ),
       Container(
         padding:
-            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.48),
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
         alignment: Alignment.center,
         child: Text(
           slideList[index].title,
@@ -41,9 +38,10 @@ class SlideItem extends StatelessWidget {
       ),
       Container(
         padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.65,
-            left: MediaQuery.of(context).size.width * 0.08,
-            right: MediaQuery.of(context).size.width * 0.08),
+          top: MediaQuery.of(context).size.height * 0.55,
+          left: MediaQuery.of(context).size.width * 0.08,
+          right: MediaQuery.of(context).size.width * 0.08,
+        ),
         alignment: Alignment.center,
         child: Text(
           slideList[index].content,
@@ -55,11 +53,13 @@ class SlideItem extends StatelessWidget {
           ),
         ),
       ),
+      const SizedBox(
+        height: 50,
+      ),
     ]);
   }
 }
 
-//Custom Painter for the bottom curve
 class BottomCurve extends CustomPainter {
   final LinearGradient gradient;
   BottomCurve({required this.gradient});
@@ -72,14 +72,10 @@ class BottomCurve extends CustomPainter {
     mainBackground.addRect(Rect.fromLTRB(0, 0, w, h));
     paint.color = Colors.black;
     canvas.drawPath(mainBackground, paint);
-
-    // ignore: non_constant_identifier_names
     Path BottomOval = Path();
-    BottomOval.moveTo(0, h * 0.76); //Start point from 80% of the height
-    BottomOval.quadraticBezierTo(w * 0.2, h * 0.675, w * 0.5,
-        h * 0.67); //From left side to middle of the screen
-    BottomOval.quadraticBezierTo(
-        w * 0.8, h * 0.675, w, h * 0.76); // From centre to right side
+    BottomOval.moveTo(0, h * 0.76);
+    BottomOval.quadraticBezierTo(w * 0.2, h * 0.675, w * 0.5, h * 0.67);
+    BottomOval.quadraticBezierTo(w * 0.8, h * 0.675, w, h * 0.76);
     BottomOval.lineTo(w, h);
     BottomOval.lineTo(0, h);
     paint.shader = ui.Gradient.linear(

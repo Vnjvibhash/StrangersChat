@@ -3,9 +3,9 @@ import 'package:strangerschat/screens/chat_screen.dart';
 import 'package:strangerschat/screens/home_screen.dart';
 import 'package:strangerschat/screens/profile_screen.dart';
 import 'package:strangerschat/screens/setting_screen.dart';
+import 'package:strangerschat/screens/signin_screen.dart';
 import 'package:strangerschat/screens/splash_screen.dart';
 import 'package:strangerschat/screens/walk_through_slider.dart';
-import 'package:strangerschat/screens/welcome_screen.dart';
 import 'package:strangerschat/models/message_model.dart';
 
 class AppRoutes {
@@ -16,14 +16,14 @@ class AppRoutes {
   static const String settingScreen = '/settings';
   static const String splashScreen = '/splash';
   static const String walkThroughSlider = '/walkthrough';
-  static const String welcomeScreen = '/welcome';
+  static const String signInScreen = '/signin';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splashScreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
-      case welcomeScreen:
-        return MaterialPageRoute(builder: (_) => const WelcomeScreen());
+      case signInScreen:
+        return MaterialPageRoute(builder: (_) => const SignInnScreen());
       case walkThroughSlider:
         return MaterialPageRoute(builder: (_) => const WalkThroughSlider());
       case homeScreen:
