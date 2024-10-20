@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "405701280385",
+    "project_id": "strangerschat-22fce",
+    "storage_bucket": "strangerschat-22fce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405701280385:android:1ddccb9d1f381a51428380",
+        "android_client_info": {
+          "package_name": "in.innovateria.strangerschat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDof8ygsWp9hhwqaqjrq-SXp__a2ggDEJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
