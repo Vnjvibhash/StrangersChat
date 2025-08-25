@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:strangerschat/router/routes.dart';
 import 'package:strangerschat/widgets/drawer_widget.dart';
 import 'package:strangerschat/widgets/online_users.dart';
@@ -8,6 +9,7 @@ import 'package:strangerschat/widgets/favorite_contacts.dart';
 import 'package:strangerschat/widgets/recent_chats.dart';
 import 'package:strangerschat/widgets/search_model.dart';
 import 'package:strangerschat/models/user_model.dart';
+import 'dart:developer' as developer;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +20,12 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   Timer? _timer;
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: <String>[
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
   @override
   void initState() {
@@ -39,10 +47,18 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _logout() {
-    Navigator.pushReplacementNamed(context, AppRoutes.signInScreen);
+  // Handle sign-out
+  void _logout() async {
+    await _googleSignIn.signOut();
+    setState(() {
+    });
+    developer.log('User signed out', name: 'Strangers Chat');
+    if(mounted) {
+      Navigator.pushReplacementNamed(context, AppRoutes.signInScreen);
+    }
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

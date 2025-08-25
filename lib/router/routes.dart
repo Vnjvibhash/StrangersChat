@@ -33,10 +33,10 @@ class AppRoutes {
       case settingScreen:
         return MaterialPageRoute(builder: (_) => const SettingScreen());
       case chatScreen:
-        final Message message = settings.arguments as Message; // Get the passed message
-        return MaterialPageRoute(builder: (_) => ChatScreen(user: message.sender)); // Pass message sender
+        final Message message = settings.arguments as Message;
+        return MaterialPageRoute(builder: (_) => ChatScreen(user: message.sender));
       default:
-        return MaterialPageRoute(builder: (_) => const SplashScreen());  // Default fallback
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
     }
   }
 

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "405701280385",
+    "firebase_url": "https://strangerschat-22fce-default-rtdb.firebaseio.com",
     "project_id": "strangerschat-22fce",
     "storage_bucket": "strangerschat-22fce.appspot.com"
   },
@@ -12,7 +13,12 @@
           "package_name": "in.innovateria.strangerschat"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "405701280385-deqd6qhpkjmsvlfblsa5m56hf6lu4pg7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDof8ygsWp9hhwqaqjrq-SXp__a2ggDEJI"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405701280385-deqd6qhpkjmsvlfblsa5m56hf6lu4pg7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

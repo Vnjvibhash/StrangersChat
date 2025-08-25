@@ -6,14 +6,14 @@ import 'package:strangerschat/router/routes.dart';
 class SearchModel extends StatefulWidget {
   final List<User> users;  // Accept the list of users as a parameter
 
-  const SearchModel({Key? key, required this.users}) : super(key: key);
+  const SearchModel({super.key, required this.users});
 
   @override
   _SearchModelState createState() => _SearchModelState();
 }
 
 class _SearchModelState extends State<SearchModel> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<User> filteredUsers = [];
 
   @override
@@ -42,44 +42,46 @@ class _SearchModelState extends State<SearchModel> {
             onChanged: _filterUsers,
             decoration: InputDecoration(
               labelText: 'Search Users...',
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
         ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: filteredUsers.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage(filteredUsers[index].imageUrl),
-                ),
-                title: Text(filteredUsers[index].name),
-                subtitle: Text(filteredUsers[index].bio),
-                onTap: () {
-                  Navigator.pop(context);
-                  Message message = Message(
-                    sender: filteredUsers[index],
-                    time: DateTime.now().toString(),
-                    text: "Hey, how's it going?",
-                    isLiked: false,
-                    unread: true,
-                    isFavorite: false,
-                    isRecent: true,
-                    isOnline: true,
-                  );
-
-                  Navigator.pushNamed(
-                    context,
-                    AppRoutes.chatScreen,
-                    arguments: message,  // Pass the Message object
-                  );
-                },
-              );
-            },
+        SingleChildScrollView(
+          child: Expanded(
+            child: ListView.builder(
+              itemCount: filteredUsers.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage(filteredUsers[index].imageUrl),
+                  ),
+                  title: Text(filteredUsers[index].name),
+                  subtitle: Text(filteredUsers[index].bio),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Message message = Message(
+                      sender: filteredUsers[index],
+                      time: DateTime.now().toString(),
+                      text: "Hey, how's it going?",
+                      isLiked: false,
+                      unread: true,
+                      isFavorite: false,
+                      isRecent: true,
+                      isOnline: true,
+                    );
+          
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.chatScreen,
+                      arguments: message,  // Pass the Message object
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ),
       ],

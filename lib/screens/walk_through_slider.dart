@@ -6,7 +6,7 @@ import 'package:strangerschat/router/routes.dart';
 import 'package:strangerschat/widgets/walk_through_items.dart';
 
 class WalkThroughSlider extends StatefulWidget {
-  const WalkThroughSlider({Key? key}) : super(key: key);
+  const WalkThroughSlider({super.key});
 
   @override
   State<WalkThroughSlider> createState() => _WalkThroughSliderState();

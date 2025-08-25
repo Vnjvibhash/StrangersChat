@@ -5,7 +5,7 @@ import 'package:strangerschat/widgets/logout_model.dart';
 class CustomDrawer extends StatelessWidget {
   final VoidCallback onLogout;
 
-  const CustomDrawer({Key? key, required this.onLogout}) : super(key: key);
+  const CustomDrawer({super.key, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:strangerschat/router/routes.dart';
 import 'package:strangerschat/screens/walk_through_slider.dart';
+import 'dart:developer' as developer;
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,22 +12,43 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+    final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: <String>[
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+
   @override
   void initState() {
     super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+      setState(() {
+      });
+
+      if (account != null) {
+        developer.log('User signed in: ${account.displayName}',
+            name: 'Strangers Chat');
+        if (mounted) {
+          Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+        }
+      }
+    });
+
+    // Sign in silently if a user is already signed in
+    _googleSignIn.signInSilently();
     _navigateToHome();
   }
 
   _navigateToHome() async {
     await Future.delayed(const Duration(milliseconds: 3000), () {});
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              const WalkThroughSlider()),
-      (Route<dynamic> route) =>
-          false,
-    );
+    if (mounted) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const WalkThroughSlider()),
+        (Route<dynamic> route) => false,
+      );
+    }
   }
 
   @override
